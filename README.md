@@ -2,6 +2,8 @@
 
 勘境 KINEWORLD 官网源码 — kineworld.com
 
+正式世界模型名称为 **KineOne-WM**。`KINE-EXP-001` 与 `KINE-JEPA` 仅作为历史实验编号和兼容代号保留；KineOne-WM 与第三方榜单中既有的 `KineWorld` 条目无关。
+
 > 我们把官网也开源：一个宣称"开放、可复现"的公司，网站本身不该是黑箱。
 
 ## 内容
