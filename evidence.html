@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>证据核验 — 勘境 KINEWORLD</title>
+<meta name="description" content="勘境不要求任何人相信结论。官网、代码、实验、基准、报告的每一条主张都附可复核的证据路径，任何人可在十分钟内独立验证。">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg-soft: #101722;
+    --fg: #e8edf4;
+    --muted: #8b98a9;
+    --accent: #38d9a9;
+    --accent-2: #4dabf7;
+    --border: #1e2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10,14,20,.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: .06em; color: var(--fg); }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; transition: color .2s; }
+  .nav-links a:hover { color: var(--fg); }
+
+  .page-head {
+    padding: 90px 0 60px;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(56,217,169,.08), transparent),
+      radial-gradient(ellipse 40% 35% at 80% 20%, rgba(77,171,247,.06), transparent);
+  }
+  .tag { display: inline-block; font-size: 13px; color: var(--accent); border: 1px solid rgba(56,217,169,.35); border-radius: 999px; padding: 5px 16px; margin-bottom: 24px; letter-spacing: .12em; }
+  h1 { font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; line-height: 1.3; }
+  .sub { margin-top: 20px; max-width: 760px; color: var(--muted); font-size: 16px; }
+
+  section { padding: 70px 0; border-top: 1px solid var(--border); }
+  .section-tag { font-size: 13px; color: var(--accent); letter-spacing: .18em; margin-bottom: 14px; }
+  h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; margin-bottom: 18px; }
+  .lead { color: var(--muted); max-width: 760px; font-size: 15.5px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; letter-spacing: .05em; }
+  td:first-child { color: var(--fg); font-weight: 600; white-space: nowrap; }
+  td:nth-child(2) { color: var(--muted); }
+
+  pre {
+    margin-top: 24px; background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; overflow-x: auto;
+    font-size: 13.5px; line-height: 1.8; color: #c9d4e3;
+  }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
+  .card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; }
+  .card .q { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .card .a { color: var(--muted); font-size: 14px; }
+
+  .note { margin-top: 28px; border-left: 3px solid var(--accent-2); background: rgba(77,171,247,.06); padding: 16px 20px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 14px; }
+
+  ul.bounds { margin-top: 20px; padding-left: 22px; color: var(--muted); font-size: 15px; }
+  ul.bounds li { margin-bottom: 10px; }
+
+  footer { border-top: 1px solid var(--border); padding: 44px 0; color: var(--muted); font-size: 13.5px; }
+  .foot-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/">勘境 <span>KINEWORLD</span></a>
+    <nav class="nav-links">
+      <a href="/">返回首页</a>
+      <a href="/report.html">训练报告</a>
+      <a href="/kine-bench.html">评测基准</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="wrap">
+    <span class="tag">OPEN EVIDENCE</span>
+    <h1>不要相信我们，<br>来验证我们。</h1>
+    <p class="sub">勘境不要求任何人相信任何一个结论。我们把每一条主张的证据路径全部公开——官网、代码、实验、基准、报告，任何人可以在十分钟内独立复核。复现不了的进展只是故事。</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">CLAIMS → EVIDENCE</div>
+    <h2>主张与证据</h2>
+    <table>
+      <tr><th>主张</th><th>证据</th><th>如何复核</th></tr>
+      <tr>
+        <td>官网在线</td>
+        <td>kineworld.com 双域名 HTTPS，证书自动续期</td>
+        <td><code>curl -I https://kineworld.com</code> → 200</td>
+      </tr>
+      <tr>
+        <td>核心代码开源</td>
+        <td>4 个公开仓库，MIT 协议：<a href="https://github.com/zoahdev/kine-datapipe">kine-datapipe</a>（数据管线）、<a href="https://github.com/zoahdev/kine-jepa">kine-jepa</a>（模型与训练）、<a href="https://github.com/zoahdev/kine-bench">kine-bench</a>（评测基准）、<a href="https://github.com/zoahdev/kineworld-site">kineworld-site</a>（连本站源码）</td>
+        <td>git clone 任意仓库，逐文件审阅</td>
+      </tr>
+      <tr>
+        <td>训练真实进行</td>
+        <td>KINE-EXP-001 单卡实验：<a href="/report.html">训练报告</a>、每 100 步一条的 metrics.jsonl、每 5000 步的检查点</td>
+        <td>按报告页复现命令自训 30 步冒烟，或完整重跑</td>
+      </tr>
+      <tr>
+        <td>评测有基准</td>
+        <td>KINE-Bench 四项任务（时序 / 运动 / 事件 / 未来预测），每项附随机基线，结果文件随仓库提交</td>
+        <td>读 <a href="https://github.com/zoahdev/kine-bench">kine-bench</a> 的 results/ 与 metrics.py，自行复跑</td>
+      </tr>
+      <tr>
+        <td>数据管线可复现</td>
+        <td>kine-datapipe v0.3：下载→切分→运动过滤→物理事件挖掘，全链路有日志</td>
+        <td>按 README 快速开始在本地重跑管线</td>
+      </tr>
+      <tr>
+        <td>技术报告公开</td>
+        <td><a href="/report.html">消费级 GPU 世界模型训练报告</a>：曲线由脚本从日志自动生成，无人工修饰</td>
+        <td>对照仓库内 metrics.jsonl 自行绘图核对</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-tag">VERIFY IN 10 MINUTES</div>
+    <h2>十分钟验证指南</h2>
+    <p class="lead">以下命令在任何一台带 NVIDIA 显卡（甚至只用 CPU）的机器上都能执行。我们不预设你会信任我们，我们预设你会怀疑：</p>
+    <pre># 1. 官网与证书
+curl -I https://kineworld.com
+
+# 2. 克隆代码，跑一次 30 步冒烟训练（任何 GPU 均可）
+git clone https://github.com/zoahdev/kine-jepa.git
+cd kine-jepa
+python -m venv .venv
+.venv/Scripts/pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128   # Linux/macOS 用 .venv/bin/pip
+.venv/Scripts/pip install -r requirements.txt
+.venv/Scripts/python -m kineworld_jepa.train --smoke --steps 30
+
+# 3. 克隆评测基准，复算我们的数字
+git clone https://github.com/zoahdev/kine-bench.git
+# 完整步骤见 kine-bench/README.md，结果写入 results/*.json 可逐项对照</pre>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">ASK US ANYTHING</div>
+    <h2>我们主动欢迎这些质疑</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="q">"你们能复现吗？"</div>
+        <div class="a">能。上面就是复现路径。判断任何一家世界模型团队，只需要问这一个问题。</div>
+      </div>
+      <div class="card">
+        <div class="q">"数字是不是挑好的说？"</div>
+        <div class="a">不是。低于随机基线的数字（如 KINE-TEMP-1 在早期检查点为 0.500）同样原样发布在报告与仓库里。我们公布失败，因为失败是训练的一部分。</div>
+      </div>
+      <div class="card">
+        <div class="q">"规模这么小，有什么意义？"</div>
+        <div class="a">98 条片段证明的是管线与工程的可复现性，不是 SOTA 表征——这句话同样写在报告里。意义在于：当别人还在讲愿景，我们已经在公开地做实验。</div>
+      </div>
+      <div class="card">
+        <div class="q">"怎么证明比别人强？"</div>
+        <div class="a">我们不点名比较。把这一页转给任何声称有世界模型的团队，请他们给出同等密度的可查证证据——比较自然会有结果。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-tag">HONEST LIMITS</div>
+    <h2>我们还没做到的事</h2>
+    <ul class="bounds">
+      <li><strong>真机部署尚未启动</strong>——六个月内公开演示是写进路线图的承诺，未到期，不虚构。</li>
+      <li><strong>数据规模仍是消费级</strong>——单卡实验回答的是"方法可复现"，不是"表征最强"。</li>
+      <li><strong>尚未完成融资</strong>——我们的尽调材料就是这些公开链接本身。</li>
+    </ul>
+    <div class="note">这一页存在的意义：用证据替代承诺，用可复核替代宣称。勘境相信，世界模型这个领域需要的不是更多发布会，而是更多可以被任何人验证的实验。</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-flex">
+    <div>
+      <strong style="color:var(--fg);">勘境 KINEWORLD</strong><br>
+      合肥 · 具身智能世界模型
+    </div>
+    <div>
+      更新于 2026-08-30 · 本页所有链接长期有效，欢迎随时回来复核<br>
+      © 2026 勘境 · <a href="/">kineworld.com</a> · 本站开源：<a href="https://github.com/zoahdev/kineworld-site">kineworld-site</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
