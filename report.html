@@ -127,17 +127,18 @@
 
 <section id="bench">
   <div class="wrap">
-    <div class="section-tag">FIRST BENCHMARK · KINE-BENCH v0.2</div>
+    <div class="section-tag">FIRST BENCHMARK · KINE-BENCH v0.3</div>
     <h2>KINE-Bench 首批结果 · ckpt-step5000</h2>
-    <p class="lead">训练进行中，先用第 5000 步检查点跑通全链路评测（全部 98 条真实片段 + 10 条原始视频的 24 个物理事件，冻结模型，单卡）：</p>
+    <p class="lead">训练进行中，先用第 5000 步检查点跑通全链路评测（全部 98 条真实片段 + 10 条原始视频的 24 个物理事件 + 3 个 MuJoCo 物理仿真场景，冻结模型，单卡）：</p>
     <table>
       <tr><th>任务</th><th>分数</th><th>基线</th><th>解读</th></tr>
       <tr><td>KINE-FUT-1 未来预测</td><td style="color:var(--accent); font-weight:700;">0.823</td><td>0.127（随机 token 对）</td><td>预测器"想象"的未来与真实未来高度相似——世界模型核心能力已见雏形</td></tr>
       <tr><td>KINE-MOT-1 运动编码</td><td>0.660</td><td>0.0</td><td>表征已显著编码运动强度信息</td></tr>
       <tr><td>KINE-EVT-1 事件响应（v0.2 新增）</td><td>0.539</td><td>0.5（像素帧差 0.515）</td><td>碰撞/掉落事件前后的表征位移仅略高于随机——略胜纯像素帧差，事件结构仍在形成中</td></tr>
+      <tr><td>KINE-EMB-1 具身仿真（v0.3 新增）</td><td>0.681</td><td>0.683（token 置换）</td><td>MuJoCo 分布外物理场景的想象力与置换基线打平——物理想象尚未泛化，如实发布</td></tr>
       <tr><td>KINE-TEMP-1 时序理解</td><td>0.500</td><td>0.5</td><td>恰等于随机基线——时序结构尚未建立，如实发布、持续跟踪</td></tr>
     </table>
-    <div class="note">完整结果文件与评测代码：<a href="https://github.com/zoahdev/kine-bench">github.com/zoahdev/kine-bench</a>（results/KINE-EXP-001-ckpt-step5000-v02.json）。TEMP-1 / EVT-1 未过或未显著过基线，不修饰、不隐藏；训练完成后用最终检查点复测并更新本页。</div>
+    <div class="note">完整结果文件与评测代码：<a href="https://github.com/zoahdev/kine-bench">github.com/zoahdev/kine-bench</a>（results/KINE-EXP-001-ckpt-step5000-v03.json）。检查点权重已发 <a href="https://github.com/zoahdev/kine-jepa/releases/tag/exp001-step5000-weights">GitHub Release</a>，任何人可下载复评。TEMP-1 / EVT-1 / EMB-1 未过或未显著过基线，不修饰、不隐藏；训练完成后用最终检查点复测并更新本页。</div>
   </div>
 </section>
 

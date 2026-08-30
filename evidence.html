@@ -122,8 +122,13 @@
       </tr>
       <tr>
         <td>评测有基准</td>
-        <td>KINE-Bench 四项任务（时序 / 运动 / 事件 / 未来预测），每项附随机基线，结果文件随仓库提交</td>
+        <td>KINE-Bench v0.3 五项任务（时序 / 运动 / 事件 / 未来预测 / MuJoCo 具身仿真），每项附随机基线，结果文件随仓库提交</td>
         <td>读 <a href="https://github.com/zoahdev/kine-bench">kine-bench</a> 的 results/ 与 metrics.py，自行复跑</td>
+      </tr>
+      <tr>
+        <td>模型权重公开</td>
+        <td>step5000 检查点（fp16，112.6 MB）已发 <a href="https://github.com/zoahdev/kine-jepa/releases/tag/exp001-step5000-weights">GitHub Release</a>，可被 kine-bench 直接加载</td>
+        <td>下载权重，<code>python -m kinebench run --ckpt 权重文件</code> 复评全部数字</td>
       </tr>
       <tr>
         <td>数据管线可复现</td>
