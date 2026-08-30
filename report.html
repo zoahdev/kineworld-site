@@ -125,6 +125,21 @@
   </div>
 </section>
 
+<section id="bench">
+  <div class="wrap">
+    <div class="section-tag">FIRST BENCHMARK</div>
+    <h2>KINE-Bench 首批结果 · ckpt-step5000</h2>
+    <p class="lead">训练进行中，先用第 5000 步检查点跑通全链路评测（32 条真实片段，冻结模型，单卡）：</p>
+    <table>
+      <tr><th>任务</th><th>分数</th><th>基线</th><th>解读</th></tr>
+      <tr><td>KINE-FUT-1 未来预测</td><td style="color:var(--accent); font-weight:700;">0.783</td><td>0.181（随机 token 对）</td><td>预测器"想象"的未来与真实未来高度相似——世界模型核心能力已见雏形</td></tr>
+      <tr><td>KINE-MOT-1 运动编码</td><td>0.203</td><td>0.0</td><td>表征已编码部分运动强度信息</td></tr>
+      <tr><td>KINE-TEMP-1 时序理解</td><td>0.368</td><td>0.5</td><td>低于随机基线——时序结构尚未建立，如实发布、持续跟踪</td></tr>
+    </table>
+    <div class="note">完整结果文件与评测代码：<a href="https://github.com/zoahdev/kine-bench">github.com/zoahdev/kine-bench</a>（results/KINE-EXP-001-ckpt-step5000.json）。TEMP-1 未过基线不修饰、不隐藏；训练完成后用最终检查点复测并更新本页。</div>
+  </div>
+</section>
+
 <section style="background: var(--bg-soft);">
   <div class="wrap">
     <div class="section-tag">SETUP</div>
