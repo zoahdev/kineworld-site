@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINE-Bench — 消费级世界模型评测基准 · 勘境 KINEWORLD</title>
+<meta name="description" content="KINE-Bench：勘境发起的消费级世界模型评测基准提案。不比谁的视频更好看，比谁真的学到了世界的运行方式，且全过程单卡可复核。">
+<style>
+  :root {
+    --bg: #0a0e14; --bg-soft: #101722; --fg: #e8edf4; --muted: #8b98a9;
+    --accent: #38d9a9; --accent-2: #4dabf7; --border: #1e2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg);
+    font-family: "Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(10,14,20,.85);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: .06em; color: var(--fg); }
+  .logo span { color: var(--accent); }
+  .nav-links a.back { color: var(--muted); font-size: 14px; }
+  .nav-links a.back:hover { color: var(--fg); }
+  .hero { padding: 80px 0 50px; text-align: center;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(77,171,247,.10), transparent); }
+  .hero .eyebrow { display: inline-block; font-size: 13px; color: var(--accent-2);
+    border: 1px solid rgba(77,171,247,.4); border-radius: 999px; padding: 5px 16px; margin-bottom: 24px; letter-spacing: .14em; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; line-height: 1.25; }
+  .hero p.sub { margin: 20px auto 0; max-width: 620px; color: var(--muted); font-size: 17px; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 22px; letter-spacing: .04em; }
+  section { padding: 34px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--fg); }
+  h2 .en { color: var(--accent); font-weight: 700; }
+  p { color: var(--muted); margin-bottom: 14px; }
+  p strong, li strong { color: var(--fg); }
+  ul, ol { color: var(--muted); margin: 0 0 16px 22px; }
+  li { margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 18px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 11px 12px; border: 1px solid var(--border); }
+  th { background: var(--bg-soft); color: var(--fg); font-weight: 600; }
+  td { color: var(--muted); }
+  .callout { background: var(--bg-soft); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 20px 22px; margin: 18px 0; color: var(--muted); }
+  footer { border-top: 1px solid var(--border); padding: 40px 0; color: var(--muted); font-size: 13.5px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">勘境 <span>KINEWORLD</span></div>
+    <nav class="nav-links"><a class="back" href="/">&larr; 返回主页</a></nav>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <span class="eyebrow">EVALUATION BENCHMARK · PROPOSAL v0.1</span>
+    <h1>KINE-Bench<br>消费级世界模型评测基准</h1>
+    <p class="sub">让世界模型的"进步"可以被任何人用一张消费级显卡复核。不比谁的视频更好看，比谁真的学到了世界的运行方式。</p>
+    <div class="meta">勘境 KINEWORLD 发起 · 2026-08-30 · 提案公开，征集反馈 · 代码与榜单工具永久 MIT 开源</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>为什么需要它 <span class="en">/ Why</span></h2>
+    <p>世界模型赛道当前最大的问题是<strong>不可验证</strong>：</p>
+    <ul>
+      <li>训练动辄数百张卡，学术界和创业者都无从复现；</li>
+      <li>"成本降低 90%"这类口径没有公开基准，无从核对；</li>
+      <li>论文指标（FVD 等）衡量生成质量，不衡量"物理规律是否被学到"。</li>
+    </ul>
+    <div class="callout">KINE-Bench 的定位：<strong>比谁真的学到了世界的运行方式，且全过程单卡可复核。</strong></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>三条设计原则 <span class="en">/ Principles</span></h2>
+    <ol>
+      <li><strong>消费级优先</strong>：每个评测任务必须能在单张 24GB 以下显卡完成推理，训练侧提供"单卡参考实现"。</li>
+      <li><strong>物理优先</strong>：任务考察因果与物理一致性，而非像素级重建。</li>
+      <li><strong>全流程公开</strong>：数据集构建脚本、评测代码、排行榜脚本全部开源。</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>任务集 <span class="en">/ Tasks v0.1</span></h2>
+    <table>
+      <tr><th>任务</th><th>考察点</th><th>形式</th></tr>
+      <tr><td><strong>KINE-PHY-1</strong> 落体与反弹</td><td>重力加速度、恢复系数一致性</td><td>给前半段视频预测后半段隐空间轨迹，与参考物理模拟做时序相关性</td></tr>
+      <tr><td><strong>KINE-PHY-2</strong> 碰撞传递</td><td>动量守恒直觉</td><td>判别扰动样本（违反动量守恒的合成帧）</td></tr>
+      <tr><td><strong>KINE-CAU-1</strong> 干预预测</td><td>因果而非相关</td><td>同场景"有/无干预"配对视频，模型对干预后果的区分度</td></tr>
+      <tr><td><strong>KINE-EMB-1</strong> 可供性</td><td>面向操作的表征</td><td>抓取可行区域预测与标注 IoU（小规模人工标注集）</td></tr>
+    </table>
+    <p>每个任务提供：<strong>冻结评测集 + 参考随机基线 + 参考单卡模型分数</strong>。提交即对比三者。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>提交流程 <span class="en">/ Submit</span></h2>
+    <ol>
+      <li>Fork KINE-Bench 仓库；</li>
+      <li>本地运行 <code style="color:var(--accent);">kinebench eval --task all</code>（评测脚本固定，防止过拟合私有集）；</li>
+      <li>提交 <code style="color:var(--accent);">results.json</code> + 训练配置 + 硬件说明，PR 即入榜；</li>
+      <li>榜单按"单卡赛道 / 不限算力赛道"分列——<strong>单卡赛道是主赛道</strong>。</li>
+    </ol>
+    <h2 style="margin-top:26px;">路线图 <span class="en">/ Roadmap</span></h2>
+    <ul>
+      <li>2026-09：任务定义冻结，合成负样本生成器发布</li>
+      <li>2026-10：KINE-PHY-1/2 评测代码与参考分数发布</li>
+      <li>2026-11：全部任务上线，榜单开放提交</li>
+    </ul>
+    <div class="callout">欢迎任何团队（包括同行竞品）提交结果——基准的价值在于大家都用。</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--fg);">勘境 KINEWORLD</strong> · 合肥 · 具身智能世界模型<br>
+    <a href="mailto:contact@kineworld.com">contact@kineworld.com</a> · © 2026 勘境 · <a href="/">kineworld.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

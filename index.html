@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勘境 KINEWORLD — 机器人世界模型</title>
+<meta name="description" content="勘境 KINEWORLD：面向具身智能的开放式世界模型。从真实世界视频中学习物理规律，让机器人先想象、再行动。开源、可复现、场景闭环。">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg-soft: #101722;
+    --fg: #e8edf4;
+    --muted: #8b98a9;
+    --accent: #38d9a9;
+    --accent-2: #4dabf7;
+    --border: #1e2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10,14,20,.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: .06em; color: var(--fg); }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: var(--muted); font-size: 14px; transition: color .2s; }
+  .nav-links a:hover { color: var(--fg); }
+
+  .hero {
+    padding: 120px 0 100px; text-align: center;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(56,217,169,.08), transparent),
+      radial-gradient(ellipse 40% 35% at 80% 20%, rgba(77,171,247,.06), transparent);
+  }
+  .hero .eyebrow {
+    display: inline-block; font-size: 13px; color: var(--accent);
+    border: 1px solid rgba(56,217,169,.35); border-radius: 999px;
+    padding: 5px 16px; margin-bottom: 28px; letter-spacing: .12em;
+  }
+  .hero h1 { font-size: clamp(34px, 5.5vw, 58px); font-weight: 800; line-height: 1.25; letter-spacing: .02em; }
+  .hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.sub { margin: 26px auto 0; max-width: 640px; color: var(--muted); font-size: 17px; }
+  .hero .cta { margin-top: 42px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 13px 32px; border-radius: 8px;
+    font-size: 15px; font-weight: 600; transition: all .2s;
+  }
+  .btn-primary { background: var(--accent); color: #06120d; }
+  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--fg); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  section { padding: 90px 0; border-top: 1px solid var(--border); }
+  .section-tag { font-size: 13px; color: var(--accent); letter-spacing: .18em; margin-bottom: 14px; }
+  h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 700; margin-bottom: 18px; }
+  .lead { color: var(--muted); max-width: 720px; font-size: 16px; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 44px; }
+  .card {
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px;
+    padding: 30px 26px; transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: rgba(56,217,169,.4); transform: translateY(-3px); }
+  .card h3 { font-size: 18px; margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: 14.5px; }
+  .card .num { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .1em; display: block; margin-bottom: 14px; }
+
+  .pipeline { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; }
+  .step { position: relative; padding: 26px 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-soft); }
+  .step + .step { margin-left: 14px; }
+  .step .idx { font-size: 22px; font-weight: 800; color: var(--accent-2); opacity: .9; }
+  .step h4 { margin: 10px 0 8px; font-size: 16px; }
+  .step p { font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 900px) { .step + .step { margin-left: 0; margin-top: 14px; } }
+
+  .roadmap { margin-top: 40px; }
+  .rm-item { display: flex; gap: 22px; padding: 22px 0; border-bottom: 1px dashed var(--border); }
+  .rm-item:last-child { border-bottom: none; }
+  .rm-time { min-width: 110px; color: var(--accent); font-weight: 700; font-size: 14px; }
+  .rm-item h4 { font-size: 16px; margin-bottom: 6px; }
+  .rm-item p { color: var(--muted); font-size: 14px; }
+
+  .quote { text-align: center; padding: 100px 0; }
+  .quote p { font-size: clamp(20px, 3vw, 28px); font-weight: 600; max-width: 760px; margin: 0 auto; line-height: 1.6; }
+  .quote p span { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 44px 0; color: var(--muted); font-size: 13.5px; }
+  .foot-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">勘境 <span>KINEWORLD</span></div>
+    <nav class="nav-links">
+      <a href="#vision">定位</a>
+      <a href="#tech">技术路线</a>
+      <a href="#open">开源计划</a>
+      <a href="#exp">公开实验</a>
+      <a href="/kine-bench.html">评测基准</a>
+      <a href="#roadmap">路线图</a>
+      <a href="#contact">联系</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <span class="eyebrow">WORLD MODELS FOR EMBODIED AI</span>
+    <h1>勘万物之境，<br>给机器人一个<em>能推演的世界模型</em></h1>
+    <p class="sub">机器人不该靠背答案学会行动。勘境从真实世界的视频与交互数据中学习物理规律，让机器先在脑中推演、再在现实中行动——并且把整条训练管线开源，在消费级算力上可复现。</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#open">查看开源计划</a>
+      <a class="btn btn-ghost" href="#contact">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="wrap">
+    <div class="section-tag">POSITIONING</div>
+    <h2>具身智能的"大脑"，不该是黑箱</h2>
+    <p class="lead">世界模型是具身智能产业链最上游的环节：它决定机器人能否理解环境、预测后果、自主决策。勘境的目标是打造一个开放、可复现、面向真实场景部署的机器人世界模型——不止于论文，更要跑在真实的机器人上。</p>
+    <div class="grid3">
+      <div class="card">
+        <span class="num">01 / 世界模型</span>
+        <h3>从视频中学习物理直觉</h3>
+        <p>利用海量真实世界视频学习重力、碰撞、摩擦等物理规律，让机器人理解"世界的运行方式"，而不是记住动作的轨迹。</p>
+      </div>
+      <div class="card">
+        <span class="num">02 / 可复现工程</span>
+        <h3>消费级算力可跑通</h3>
+        <p>我们不把"大算力"当作门槛。勘境的训练与评测管线以单卡可复现为工程约束，让每一次实验都能被任何人验证。</p>
+      </div>
+      <div class="card">
+        <span class="num">03 / 场景闭环</span>
+        <h3>真机验证，数据飞轮</h3>
+        <p>模型必须落到真实机器人上接受检验。真机运行产生的交互数据回流训练，形成世界模型自己的数据飞轮。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tech" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-tag">TECHNICAL ROUTE</div>
+    <h2>技术路线</h2>
+    <p class="lead">四步走：把互联网视频变成世界知识，把世界知识变成可推演的模型，把模型变成动作，把动作带回真实世界验证。</p>
+    <div class="pipeline">
+      <div class="step">
+        <span class="idx">①</span>
+        <h4>开放数据管线</h4>
+        <p>互联网视频清洗、切片、物理事件挖掘的自动化管线，全程开源，人人可复用。</p>
+      </div>
+      <div class="step">
+        <span class="idx">②</span>
+        <h4>世界模型预训练</h4>
+        <p>在隐空间中对未来状态进行预测建模，学习可泛化的物理动力学表征。</p>
+      </div>
+      <div class="step">
+        <span class="idx">③</span>
+        <h4>想象-推演-决策</h4>
+        <p>行动前在世界模型中"预演"多个可能未来，选择最优动作序列，减少对真实试错数据的依赖。</p>
+      </div>
+      <div class="step">
+        <span class="idx">④</span>
+        <h4>真机闭环验证</h4>
+        <p>从仿真与桌面级机器人起步，逐步走向巡检、四足等真实场景，用真实表现说话。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="open">
+  <div class="wrap">
+    <div class="section-tag">OPEN SOURCE</div>
+    <h2>开源计划：代码即壁垒</h2>
+    <p class="lead">世界模型不该只诞生在大厂和论文里。勘境承诺分阶段开放：</p>
+    <div class="grid3">
+      <div class="card">
+        <h3>阶段一 · 数据管线</h3>
+        <p>视频采集、清洗与物理事件标注的自动化代码，Apache-2.0 协议，欢迎社区共建。</p>
+      </div>
+      <div class="card">
+        <h3>阶段二 · 训练与评测</h3>
+        <p>世界模型训练代码与标准化评测基准（单卡可复现），公开实验日志与失败案例。</p>
+      </div>
+      <div class="card">
+        <h3>阶段三 · 模型权重</h3>
+        <p>面向研究与非商业用途开放模型权重，商业合作以真机场景联合开发的形式展开。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exp">
+  <div class="wrap">
+    <div class="section-tag">OPEN EXPERIMENTS</div>
+    <h2>公开实验：每一步都可查证</h2>
+    <p class="lead">世界模型公司最常见的叙事是"我们有进展，但不能给你看"。勘境反着来：实验编号、代码、日志、失败案例全部公开——你可以逐条验证我们的进度。</p>
+    <div class="grid3">
+      <div class="card">
+        <span class="num">KINE-EXP-001</span>
+        <h3>单卡世界模型预训练</h3>
+        <p>基于 JEPA 架构（arXiv:2404.08471 思想的自主实现），在单张 RTX 5070 Ti 上训练，全程直播式记录。<a href="/report.html">查看训练报告与损失曲线</a>。</p>
+      </div>
+      <div class="card">
+        <span class="num">kine-datapipe</span>
+        <h3>视频数据管线</h3>
+        <p>互联网视频采集、场景切分、运动质量过滤的完整管线，MIT 协议开源：<a href="https://github.com/zoahdev/kine-datapipe">github.com/zoahdev/kine-datapipe</a></p>
+      </div>
+      <div class="card">
+        <span class="num">kine-jepa</span>
+        <h3>世界模型训练代码</h3>
+        <p>编码器、掩码策略、预测器、训练循环全部自有实现并公开，欢迎复现与挑错：<a href="https://github.com/zoahdev/kine-jepa">github.com/zoahdev/kine-jepa</a></p>
+      </div>
+      <div class="card">
+        <span class="num">KINE-Bench</span>
+        <h3>消费级评测基准</h3>
+        <p>比谁真的学到了物理规律、且单卡可复核的公开评测基准，提案已向全行业开放：<a href="/kine-bench.html">阅读提案</a></p>
+      </div>
+      <div class="card">
+        <span class="num">kineworld-site</span>
+        <h3>连官网也开源</h3>
+        <p>一个宣称开放的公司，网站本身不该是黑箱。本站全部源码公开：<a href="https://github.com/zoahdev/kineworld-site">github.com/zoahdev/kineworld-site</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-tag">ROADMAP</div>
+    <h2>路线图</h2>
+    <div class="roadmap">
+      <div class="rm-item">
+        <div class="rm-time">2026 Q3 · 进行中</div>
+        <div><h4>数据管线 v0.1 已开源 · KINE-EXP-001 训练启动</h4><p>kine-datapipe 已公开发布；首个世界模型实验 KINE-EXP-001 在单卡上启动，实验日志全程公开。</p></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-time">2026 Q4</div>
+        <div><h4>KINE-JEPA 首版 + 单卡评测基准</h4><p>完成首个可公开复现的世界模型训练与评测，发布技术报告与失败案例复盘。</p></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-time">2027 H1</div>
+        <div><h4>真机闭环：桌面级机械臂演示</h4><p>世界模型驱动实体机械臂完成推演式抓取，全程公开实验记录。</p></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-time">2027 H2</div>
+        <div><h4>场景落地试点</h4><p>在巡检 / 四足机器人场景开展联合验证，形成场景数据飞轮。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p>"世界模型最终不会诞生于论文，<br>而会诞生于<span>真实世界</span>。<br>我们再加一句：它应该向所有人开放。"</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap foot-flex">
+    <div>
+      <strong style="color:var(--fg);">勘境 KINEWORLD</strong><br>
+      合肥 · 具身智能世界模型
+    </div>
+    <div>
+      合作与加入：<a href="mailto:contact@kineworld.com">contact@kineworld.com</a><br>
+      © 2026 勘境 · kineworld.com · <a href="https://github.com/zoahdev/kineworld-site">本站开源</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
