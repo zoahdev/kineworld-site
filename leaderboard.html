@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINE-Bench 排行榜 · 勘境 KINEWORLD</title>
+<meta name="description" content="KINE-Bench 公开排行榜：单卡可复核的世界模型评测。冻结评测、随机基线、检查点可下载，任何人可提交复现成绩入榜。">
+<style>
+  :root {
+    --bg: #0a0e14; --bg-soft: #101722; --fg: #e8edf4; --muted: #8b98a9;
+    --accent: #38d9a9; --accent-2: #4dabf7; --border: #1e2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg);
+    font-family: "Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(10,14,20,.85);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: .06em; color: var(--fg); }
+  .logo span { color: var(--accent); }
+  .nav-links a.back { color: var(--muted); font-size: 14px; }
+  .nav-links a.back:hover { color: var(--fg); }
+  .hero { padding: 70px 0 44px; text-align: center;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(56,217,169,.08), transparent); }
+  .hero .eyebrow { display: inline-block; font-size: 13px; color: var(--accent-2);
+    border: 1px solid rgba(77,171,247,.4); border-radius: 999px; padding: 5px 16px; margin-bottom: 22px; letter-spacing: .14em; }
+  .hero h1 { font-size: 34px; line-height: 1.3; letter-spacing: .01em; }
+  .hero .sub { color: var(--muted); max-width: 720px; margin: 16px auto 0; font-size: 15px; }
+  section { padding: 44px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 22px; margin-bottom: 8px; }
+  .en { color: var(--muted); font-size: 13px; letter-spacing: .12em; font-weight: 400; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 9px 10px; text-align: center; }
+  th { background: var(--bg-soft); color: var(--accent-2); font-weight: 600; }
+  td.name { text-align: left; }
+  .best { color: var(--accent); font-weight: 700; }
+  .base-row td { color: var(--muted); }
+  .note { color: var(--muted); font-size: 13.5px; margin-top: 14px; }
+  ol, ul { margin: 10px 0 0 22px; }
+  li { margin: 6px 0; }
+  footer { border-top: 1px solid var(--border); padding: 26px 0; color: var(--muted); font-size: 13px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">勘境 <span>KINEWORLD</span></div>
+    <nav class="nav-links">
+      <a class="back" href="/">← 返回首页</a>
+      <a class="back" href="/kine-bench.html">基准提案</a>
+      <a class="back" href="/evidence.html">证据核验</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <span class="eyebrow">LEADERBOARD · SINGLE-GPU TRACK</span>
+    <h1>KINE-Bench 公开排行榜</h1>
+    <p class="sub">世界模型的每一次"进步"，都应该能在一张消费级显卡上被复核。榜单条目全部满足：<strong>冻结评测 · 随机基线随分 · 检查点公开可下载</strong>。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>主榜 <span class="en">/ KINE-Bench v0.3 · 98 条真实片段 + 24 个物理事件 + 3 个 MuJoCo 场景</span></h2>
+    <table>
+      <tr>
+        <th style="text-align:left;">条目（检查点）</th>
+        <th>硬件</th>
+        <th>FUT-1</th>
+        <th>MOT-1</th>
+        <th>EVT-1</th>
+        <th>EMB-1</th>
+        <th>TEMP-1</th>
+        <th>复评材料</th>
+      </tr>
+      <tr>
+        <td class="name">KINE-EXP-001 · step10000<br><span style="color:var(--muted);font-size:12px;">勘境 · 2026-08-30</span></td>
+        <td>RTX 5070 Ti 12GB</td>
+        <td class="best">0.842</td>
+        <td>0.554</td>
+        <td>0.515</td>
+        <td>0.501</td>
+        <td>0.431</td>
+        <td><a href="https://github.com/zoahdev/kine-bench/blob/main/results/KINE-EXP-001-ckpt-step10000-v03.json">results.json</a></td>
+      </tr>
+      <tr>
+        <td class="name">KINE-EXP-001 · step5000（权重可下载）<br><span style="color:var(--muted);font-size:12px;">勘境 · 2026-08-30</span></td>
+        <td>RTX 5070 Ti 12GB</td>
+        <td>0.823</td>
+        <td class="best">0.660</td>
+        <td class="best">0.539</td>
+        <td class="best">0.681</td>
+        <td class="best">0.500</td>
+        <td><a href="https://github.com/zoahdev/kine-jepa/releases/tag/exp001-step5000-weights">权重 Release</a></td>
+      </tr>
+      <tr class="base-row">
+        <td class="name">随机 / 盲猜基线</td>
+        <td>—</td>
+        <td>0.074–0.127</td>
+        <td>0.0</td>
+        <td>0.5</td>
+        <td>0.569–0.683</td>
+        <td>0.5</td>
+        <td>—</td>
+      </tr>
+    </table>
+    <div class="note">注：EMB-1 / FUT-1 的随机基线随检查点变化（与表征分布有关），故给出区间；各条目自身基线见其 results.json。低于基线的分数原样上榜——本榜比的是可查证的真实能力，不是好看的数字。</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>如何上榜 <span class="en">/ Submit</span></h2>
+    <ol>
+      <li>克隆 <a href="https://github.com/zoahdev/kine-bench">kine-bench</a>，用你的检查点运行 <code>python -m kinebench run --ckpt 你的权重 --data-dir 你的数据</code>（评测代码不得修改）；</li>
+      <li>提交 PR：results.json + 训练配置 + 硬件说明 + 权重获取方式（公开链接）；</li>
+      <li>复核通过后合入并更新本页——<strong>PR 即入榜，全程留痕</strong>；</li>
+      <li>单卡（≤16GB 显存）训练的检查点进入主榜；不限算力条目另列并注明。</li>
+    </ol>
+    <div class="note">数据要求：可以用自己的数据训练，但评测必须使用 KINE-Bench 自带的冻结评测集与固定协议（评测代码 + 数据随仓库分发），防止对私有集过拟合。</div>
+  </div>
+</section>
+
+<footer>
+  勘境 KINEWORLD · kineworld.com · 榜单与评测代码永久 MIT 开源 · 2026-08-30 首版
+</footer>
+
+</body>
+</html>
