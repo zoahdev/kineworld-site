@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对照场 · 勘境 vs 白泽路线 — KINEWORLD</title>
+<meta name="description" content="不比融资和参数。比因果能否被复核、单卡能否复现、推演之后能不能被授权和追责。">
+<style>
+  :root {
+    --bg: #0a0e14; --bg-soft: #101722; --fg: #e8edf4;
+    --muted: #8b98a9; --accent: #38d9a9; --accent-2: #4dabf7; --border: #1e2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: "Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif; line-height: 1.7; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(10,14,20,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: .06em; }
+  .logo span { color: var(--accent); }
+  .hero { padding: 96px 0 64px; }
+  .eyebrow { display: inline-block; font-size: 13px; color: var(--accent); border: 1px solid rgba(56,217,169,.35); border-radius: 999px; padding: 5px 16px; letter-spacing: .12em; margin-bottom: 22px; }
+  h1 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 800; line-height: 1.3; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { margin-top: 18px; color: var(--muted); max-width: 720px; }
+  section { padding: 64px 0; border-top: 1px solid var(--border); }
+  .section-tag { font-size: 13px; color: var(--accent); letter-spacing: .18em; margin-bottom: 12px; }
+  h2 { font-size: 26px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 14.5px; }
+  th, td { border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top; }
+  th { background: var(--bg-soft); color: var(--accent); font-weight: 600; }
+  td.win { color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 28px; }
+  .card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+  .card h3 { margin-bottom: 8px; font-size: 17px; }
+  .card p { color: var(--muted); font-size: 14.5px; }
+  .num { color: var(--accent); font-size: 12px; letter-spacing: .12em; font-weight: 700; display: block; margin-bottom: 10px; }
+  footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/">勘境 <span>KINEWORLD</span></a>
+    <a href="/">返回主站</a>
+  </div>
+</header>
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <span class="eyebrow">FIELD · NOT PRESS RELEASE</span>
+    <h1>不比谁更像神兽。<br>比谁的世界模型<em>能被勘测</em>。</h1>
+    <p class="sub">白泽路线：隐式 + 因果，最快最省落地。勘境路线：隐式 + 因果 + 单卡可复核 + 动作前授权。同一物理问题，不同验收标准。本页只比可核验的能力，不比估值。</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="section-tag">SCOREBOARD</div>
+    <h2>四件事，现在就能对照</h2>
+    <table>
+      <thead>
+        <tr><th>验收项</th><th>白泽公开口径</th><th>勘境此刻</th><th>下一刀（7 天）</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>因果，而不只是相关</td>
+          <td>溯因式世界模型；Physion++ 小对照称加入因果模块后超 V-JEPA-2 口径</td>
+          <td>KINE-EXP-001 是 JEPA 预测。EVT-1 / EMB-1 未过或刚过基线，因果未独立消融</td>
+          <td class="win">KINE-EXP-002：冻结编码器，只加干预/反事实头，单卡 48h 出表</td>
+        </tr>
+        <tr>
+          <td>单卡可复现</td>
+          <td>强调低成本落地，完整训练日志与权重未按实验编号公开</td>
+          <td class="win">5070 Ti 12GB、seed 42、代码/ckpt/metrics 已开。FUT-1 5k→10k：0.823→0.842</td>
+          <td>10k 与终版 ckpt 全量复评，失败项不删</td>
+        </tr>
+        <tr>
+          <td>推演驱动动作</td>
+          <td>目标含闭环行动、跨本体、少样本</td>
+          <td>还停在表征预训练。路线图写 2027 真机，太慢</td>
+          <td class="win">本周仿真闭环：三候选未来 → 选一条 → 假执行器走一步</td>
+        </tr>
+        <tr>
+          <td>动手许可与回执</td>
+          <td>未作为产品层公开</td>
+          <td class="win">KineGrant 已有协议草案：短时 capability + 签名回执</td>
+          <td>把 EXP-002 的「选中的未来」绑一张 grant，缺票执行器不动</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<footer>
+  <div class="wrap">对照场 v0.1 · 2026-08-31 · 勘境 KINEWORLD · 数字以公开实验为准，过期即改本页</div>
+</footer>
+</body>
+</html>
