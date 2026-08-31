@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINE-EXP-002 因果消融 — 勘境</title>
+<style>
+  :root { --bg:#0a0e14; --bg-soft:#101722; --fg:#e8edf4; --muted:#8b98a9; --accent:#38d9a9; --border:#1e2a3a; }
+  body { background:var(--bg); color:var(--fg); font-family:"Inter","PingFang SC",system-ui,sans-serif; line-height:1.7; margin:0; }
+  .wrap { max-width:960px; margin:0 auto; padding:40px 24px; }
+  a { color:var(--accent); text-decoration:none; }
+  table { width:100%; border-collapse:collapse; margin-top:20px; }
+  th,td { border:1px solid var(--border); padding:10px 12px; text-align:left; }
+  th { color:var(--accent); }
+  .wait { color:#f0c36d; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p><a href="/">勘境</a> · <a href="/report.html">EXP-001</a> · <a href="/vs-baize.html">对照场</a></p>
+  <h1>KINE-EXP-002 因果消融</h1>
+  <p>冻结 EXP-001 编码器。只训干预头 + 预测器末两层。A 无干预 / B 随机标签 / C 对齐标签。空格等 GPU，不允许填假数。</p>
+  <table>
+    <tr><th>臂</th><th>EVT-1</th><th>CAU-1</th><th>FUT-1</th><th>状态</th></tr>
+    <tr><td>A 锚</td><td class="wait">pending</td><td class="wait">pending</td><td class="wait">pending</td><td>等 5070 Ti</td></tr>
+    <tr><td>B 负对照</td><td class="wait">pending</td><td class="wait">pending</td><td class="wait">pending</td><td>等 5070 Ti</td></tr>
+    <tr><td>C 正对照</td><td class="wait">pending</td><td class="wait">pending</td><td class="wait">pending</td><td>等 5070 Ti</td></tr>
+  </table>
+  <p>通过线：C EVT-1 ≥ 0.58 且 &gt; A；CAU 比 A 高 ≥ 0.08；FUT 回撤 ≤ 0.03；B 不胜 C。</p>
+  <p>代码：<a href="https://github.com/zoahdev/kine-jepa/blob/main/EXPERIMENTS/KINE-EXP-002.md">实验单</a> · <a href="https://github.com/zoahdev/kine-jepa/blob/main/RUNBOOK.md">RUNBOOK</a></p>
+</div>
+</body>
+</html>
