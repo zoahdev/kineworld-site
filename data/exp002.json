@@ -1,0 +1,9 @@
+{
+  "arms": {
+    "A": {"KINE-EVT-1": null, "KINE-CAU-1": null, "KINE-FUT-1": null},
+    "B": {"KINE-EVT-1": null, "KINE-CAU-1": null, "KINE-FUT-1": null},
+    "C": {"KINE-EVT-1": null, "KINE-CAU-1": null, "KINE-FUT-1": null}
+  },
+  "pass": false,
+  "notes": ["waiting for 5070 Ti"]
+}
