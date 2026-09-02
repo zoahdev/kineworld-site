@@ -1,26 +1,24 @@
-# kineworld-site
+# KineWorld Public Site Archive
 
-勘境 KINEWORLD 官网源码 — kineworld.com
+Public evidence pages and historical static-site material for [kineworld.com](https://kineworld.com).
 
-正式世界模型名称为 **KineOne-WM**。`KINE-EXP-001` 与 `KINE-JEPA` 仅作为历史实验编号和兼容代号保留；KineOne-WM 与第三方榜单中既有的 `KineWorld` 条目无关。
+> The live website is the authoritative public presentation. Some files in this repository preserve earlier experiments and naming for provenance; they are not evidence of current model capability.
 
-> 我们把官网也开源：一个宣称"开放、可复现"的公司，网站本身不该是黑箱。
+## Contents
 
-## 内容
+- historical experiment and benchmark pages;
+- machine-readable result snapshots;
+- deployment and remediation notes;
+- public explanations of evidence boundaries.
 
-- `index.html` — 主站（定位 / 技术路线 / 开源计划 / 公开实验 / 路线图）
-- `report.html` — KINE-EXP-001 训练报告页（损失曲线随训练更新）
-- `kine-bench.html` — KINE-Bench 消费级世界模型评测基准提案
+The names `KineOne-WM`, `KINE-JEPA` and `KINE-EXP-001` refer to earlier prototypes or experiment identifiers. KineWorld's current company position is action-conditioned world-model research with evidence-bound claims; no public artifact currently proves a general world model, causal reasoning, third-party validation or model leadership.
 
-## 部署
+Current repositories:
 
-静态站点，托管于阿里云 OSS 静态网站，域名 `kineworld.com` / `www.kineworld.com`，HTTPS（Let's Encrypt，自动续期）。无构建步骤，直接编辑 HTML。
+- [kine-jepa](https://github.com/kineworld/kine-jepa)
+- [kine-bench](https://github.com/kineworld/kine-bench)
+- [kine-datapipe](https://github.com/kineworld/kine-datapipe)
 
-## 相关仓库
+## License
 
-- [kine-datapipe](https://github.com/zoahdev/kine-datapipe) — 视频数据管线
-- [kine-jepa](https://github.com/zoahdev/kine-jepa) — 世界模型训练代码（KINE-EXP-001）
-
-## 许可
-
-MIT
+Site content and KineWorld-authored code are MIT licensed unless a file states otherwise. Third-party assets retain their original licenses.
